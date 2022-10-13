@@ -17,26 +17,24 @@ public class Minesweeper extends Application {
         //Creating the window stuff
         Group root = new Group();
         Scene scene = new Scene(root);
-        ButtonController butCon = new ButtonController();
+        ButtonController bC = new ButtonController();   //Most Controls for the Buttons
+        MenuController mC = new MenuController();       //Most Controls for the Menu
 
-
-
-
-        //Loop to add a bunch of button
-        for(int i = 0; i < butCon.getGameHeight(); i++){                //Loop for the height
-            butCon.msButtons[i] = new Button[butCon.getGameHeight()];   //Create a new array of buttons for the width
-            for(int j =0; j< butCon.getGameWidth(); j++){               //Loop for the width
-                int buttonClickI = i;
-                int buttonClickJ = j;
-                butCon.msButtons[i][j] = new Button();                  //Create a new button
-                butCon.msButtons[i][j].relocate(i*30,j*30);       //Set the location of the button
-                butCon.msButtons[i][j].setPrefSize(30,30);        //Set the size of the button
-                butCon.msButtons[i][j].setOnAction(ActionEvent -> butCon.buttonClicked(buttonClickI,buttonClickJ)); //Set the button to be clickable
-                root.getChildren().add(butCon.msButtons[i][j]);         //Add the button to the root
-
+        //Asking for the game mode
+        mC.setGameMode("Easy");
+        for(int h = 0; h < bC.getGameHeight(); h++){                //Loop for the height = h
+            bC.gameButtons[h] = new Button[bC.getGameHeight()];       //Create a new array of buttons for the width = w
+            for(int w =0; w< bC.getGameWidth(); w++){               //Loop for the width
+                int buttonClickH = h;
+                int buttonClickW = w;
+                bC.gameButtons[h][w] = new Button();                  //Create a new button
+                bC.gameButtons[h][w].relocate(h*30,w*30);       //Set the location of the button
+                bC.gameButtons[h][w].setPrefSize(30,30);        //Set the size of the button
+                bC.gameButtons[h][w].setOnAction(ActionEvent -> bC.buttonClicked(buttonClickH,buttonClickW)); //Set the button to be clickable
+                root.getChildren().add(bC.gameButtons[h][w]);         //Add the button to the root
             }//End of inner loop gameWidth
         }//End of loop gameHeight
-
+        bC.bombCreator();
 
 
 
